@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:labsql/homepage.dart';
-import 'package:labsql/profilepage.dart';
+import 'package:labsql/createprofilepage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +19,7 @@ class _MyAppState extends State<MyApp> {
 
   final pageScreen = [
     const HomePage(),
-    const ProfilePage()
+    ProfilePage()
   ];
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class _MyAppState extends State<MyApp> {
         bottomNavigationBar: BottomNavigationBar(
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+            BottomNavigationBarItem(icon: Icon(Icons.add), label: 'Create Profile'),
           ],
           onTap: (value) {
             setState(() {
