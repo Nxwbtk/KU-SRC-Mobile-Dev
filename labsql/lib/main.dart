@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:labsql/homepage.dart';
 import 'package:labsql/createprofilepage.dart';
+import 'package:labsql/myprofilepage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +20,7 @@ class _MyAppState extends State<MyApp> {
 
   final pageScreen = [
     const HomePage(),
-    ProfilePage()
+    MyProfilePage()
   ];
   @override
   Widget build(BuildContext context) {
@@ -27,14 +28,14 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Flutter Demo'),
-          backgroundColor: Colors.amber,
+          title: const Text('Post Data App'),
+          backgroundColor: Colors.cyan,
         ),
         body: pageScreen[screenIndex],
         bottomNavigationBar: BottomNavigationBar(
           items: const [
             BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(icon: Icon(Icons.add), label: 'Create Profile'),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'My Profile'),
           ],
           onTap: (value) {
             setState(() {

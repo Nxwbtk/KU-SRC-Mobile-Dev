@@ -12,6 +12,10 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       appBar: AppBar(
+          title: const Text('Flutter Demo'),
+          backgroundColor: Colors.amber,
+        ),
       body: SingleChildScrollView(
         child: Center(
           child: Form(
@@ -40,16 +44,28 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  Map data = {
-                    'title': titleController.text,
-                    'conversation': conversationController.text
-                  };
-                  insert(data);
-                  Navigator.pop(context);
-                },
-                child: Text('Post'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('Back'),
+                  ),
+                  SizedBox(width: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      Map data = {
+                        'title': titleController.text,
+                        'conversation': conversationController.text
+                      };
+                      insert(data);
+                      Navigator.pop(context);
+                    },
+                    child: Text('Post'),
+                  ),
+                ],
               ),
             ],
           )),

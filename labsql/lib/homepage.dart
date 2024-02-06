@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:labsql/createprofilepage.dart';
 import 'package:labsql/database.dart';
 import 'package:labsql/model.dart';
+import 'package:labsql/updateform.dart';
 
 AppDatabase db = AppDatabase();
 
@@ -15,13 +17,18 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
+        onPressed: () async {
+          await Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => ProfilePage()),
-          );
+          ).then((_) => {
+            setState(() {
+              db.getAllData();
+            })
+          });
         },
         child: const Icon(Icons.add),
       ),
@@ -34,6 +41,9 @@ class _HomePageState extends State<HomePage> {
               itemBuilder: (context, index) {
                 TopicModel item = snapshot.data![index];
                 return GestureDetector(
+                  onTap: () {
+                    showDetail(item);
+                  },
                   child: ListTile(
                     leading: CircleAvatar(
                       backgroundColor: Colors.grey[300],
@@ -60,11 +70,11 @@ class _HomePageState extends State<HomePage> {
                           Expanded(
                             child: IconButton(
                               onPressed: () {
-                                // Navigator.push(context, MaterialPageRoute(builder: (context) => {}, settings: RouteSettings(arguments: topic))).then((_) => {
-                                //   setState(() {
-                                //     db.getAllData();
-                                //   })
-                                // });
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => updateForm(), settings: RouteSettings(arguments: item))).then((_) => {
+                                  setState(() {
+                                    db.getAllData();
+                                  })
+                                });
                               },
                               icon: Icon(Icons.edit, color: Colors.green),
                             ),
